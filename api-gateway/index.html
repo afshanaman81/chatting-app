@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font: 13px Helvetica, Arial;
+      }
+      form {
+        background: #000;
+        padding: 3px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+      form input {
+        border: 0;
+        padding: 10px;
+        width: 80%;
+        margin-right: 0.5%;
+      }
+      form button {
+        width: 9%;
+        background: rgb(130, 224, 255);
+        border: none;
+        padding: 10px;
+        margin-right: 5px;
+      }
+      #messages,
+      #broadcasts {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      #broadcasts li,
+      #messages li {
+        margin-right: 10px;
+        padding: 5px 10px;
+      }
+      #broadcasts li:nth-child(even),
+      #messages li:nth-child(odd) {
+        background: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <td>Message for you</td>
+          <td>Message for all</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><ul id="messages"></ul></td>
+          <td><ul id="broadcasts"></ul></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form action="">
+      <input id="m" autocomplete="off" /><button id="send">Send</button
+      ><button id="broadcast">Broadcast</button>
+    </form>
+  </body>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+    $(function() {
+      var socket = io();
+
+      // JQuery events
+      $('#send').click(function(e) {
+        e.preventDefault(); // prevents page reloading
+        socket.emit('message', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+
+      $('#broadcast').click(function(e) {
+        e.preventDefault(); // prevents page reloading
+        socket.emit('broadcast', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+
+      // Socket events
+      socket.on('message', msg => {
+        $('#messages').append($('<li>').text(msg));
+      });
+
+      socket.on('broadcast', msg => {
+        $('#broadcasts').append($('<li>').text(msg));
+      });
+    });
+  </script>
+</html>

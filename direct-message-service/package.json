@@ -1,0 +1,22 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "description": "A chat app using micro-services architecture",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon indexljs",
+    "test": "test"
+  },
+  "keywords": [
+    "websockets",
+    "docker",
+    "kubernetes",
+    "micro-services"
+  ],
+  "author": "Afshan Aman",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
