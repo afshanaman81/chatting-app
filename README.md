@@ -19,3 +19,8 @@ Remember: HTTP is client-to-server communication
 To do a server to client communication, we need Websockets
 
 
+https://itnext.io/building-a-node-js-websocket-chat-app-with-socket-io-and-react-473a0686d1e1
+
+https://www.nginx.com/blog/5-performance-tips-for-node-js-applications/
+
+https://www.lunchbadger.com/blog/build-load-balancer-express/
